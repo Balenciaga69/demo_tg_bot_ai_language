@@ -18,6 +18,7 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   unicorn.configs.recommended,
+  sonarRecommended,
   eslintPluginPrettierRecommended,
   {
     plugins: {
@@ -50,9 +51,9 @@ export default tseslint.config(
 
       // TypeScript
       '@typescript-eslint/no-explicit-any': 'off',
-      // '@typescript-eslint/no-floating-promises': 'warn',
+      '@typescript-eslint/no-floating-promises': 'warn',
       // '@typescript-eslint/no-unsafe-argument': 'warn',
-      // '@typescript-eslint/explicit-function-return-type': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'warn',
       '@typescript-eslint/explicit-module-boundary-types': 'warn',
 
       // Code complexity

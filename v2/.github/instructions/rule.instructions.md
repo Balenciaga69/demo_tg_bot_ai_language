@@ -29,3 +29,39 @@ applyTo: '**'
 
 - https://core.telegram.org/bots/api
 - https://grammy.dev/
+
+# 若有需要
+
+- 執行以下指令來檢查專案的 lint 和 build 是否正常
+
+```bash
+Write-Host "=== [1/3] npm run lint ==="
+$lintResult = & cmd /c "npm run lint" 2>&1
+$lintExitCode = $LASTEXITCODE
+Write-Host $lintResult
+Write-Host "Exit Code: $lintExitCode"
+Write-Host "`n"
+
+
+
+Write-Host "=== [2/3] npm run build ==="
+$buildResult = & cmd /c "npm run build" 2>&1
+$buildExitCode = $LASTEXITCODE
+Write-Host $buildResult
+Write-Host "Exit Code: $buildExitCode"
+Write-Host "`n"
+
+
+
+Write-Host "=== [3/3] npm run test ==="
+$testResult = & cmd /c "npm run test" 2>&1
+$testExitCode = $LASTEXITCODE
+Write-Host $testResult
+Write-Host "Exit Code: $testExitCode"
+Write-Host "`n"
+
+Write-Host "=== 總結 ==="
+Write-Host "Lint Exit Code: $lintExitCode"
+Write-Host "Build Exit Code: $buildExitCode"
+Write-Host "Test Exit Code: $testExitCode"
+```
