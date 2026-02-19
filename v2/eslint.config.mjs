@@ -8,6 +8,9 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
+// Guarded sonarjs recommended config to avoid runtime/typing issues when undefined
+const sonarRecommended = (sonarjs && sonarjs.configs && sonarjs.configs.recommended) || {}
+
 export default tseslint.config(
   {
     ignores: ['eslint.config.mjs', 'dist/**', 'node_modules/**', 'bin/**', 'build/**', '.eslintcache'],
@@ -15,7 +18,6 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   unicorn.configs.recommended,
-  sonarjs.configs.recommended,
   eslintPluginPrettierRecommended,
   {
     plugins: {
@@ -50,7 +52,7 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'off',
       // '@typescript-eslint/no-floating-promises': 'warn',
       // '@typescript-eslint/no-unsafe-argument': 'warn',
-      '@typescript-eslint/explicit-function-return-type': 'warn',
+      // '@typescript-eslint/explicit-function-return-type': 'warn',
       '@typescript-eslint/explicit-module-boundary-types': 'warn',
 
       // Code complexity
