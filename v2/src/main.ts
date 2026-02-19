@@ -1,7 +1,6 @@
 import { INestApplication } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
-import { WinstonModule } from 'nest-winston'
 import { AppModule } from './app.module'
 /** 設置 Swagger API 文件 */
 const setupSwagger = (app: INestApplication): void => {
@@ -10,6 +9,7 @@ const setupSwagger = (app: INestApplication): void => {
   SwaggerModule.setup('api', app, document)
 }
 /** 啟動應用程式 */
+// eslint-disable-next-line unicorn/prefer-top-level-await
 void bootstrap()
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule)
