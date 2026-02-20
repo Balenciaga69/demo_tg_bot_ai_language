@@ -59,6 +59,12 @@ importers:
       class-validator:
         specifier: ^0.14.3
         version: 0.14.3
+      cookie-parser:
+        specifier: ^1.4.7
+        version: 1.4.7
+      csrf-csrf:
+        specifier: ^4.0.3
+        version: 4.0.3
       difflib:
         specifier: ^0.2.4
         version: 0.2.4
@@ -74,6 +80,9 @@ importers:
       grammy:
         specifier: ^1.40.0
         version: 1.40.0
+      helmet:
+        specifier: ^8.1.0
+        version: 8.1.0
       ioredis:
         specifier: ^5.9.2
         version: 5.9.3
@@ -126,6 +135,9 @@ importers:
       '@nestjs/testing':
         specifier: ^11.0.1
         version: 11.1.13(@nestjs/common@11.1.13(class-transformer@0.5.1)(class-validator@0.14.3)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.13)(@nestjs/microservices@11.1.14)(@nestjs/platform-express@11.1.13)
+      '@types/cookie-parser':
+        specifier: ^1.4.10
+        version: 1.4.10(@types/express@5.0.6)
       '@types/difflib':
         specifier: ^0.2.7
         version: 0.2.7
@@ -1110,6 +1122,11 @@ packages:
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
 
+  '@types/cookie-parser@1.4.10':
+    resolution: {integrity: sha512-B4xqkqfZ8Wek+rCOeRxsjMS9OgvzebEzzLYw7NHYuvzb7IdxOkI0ZHGgeEBX4PUM7QGVvNSK60T3OvWj3YfBRg==}
+    peerDependencies:
+      '@types/express': '*'
+
   '@types/cookiejar@2.1.5':
     resolution: {integrity: sha512-he+DHOWReW0nghN24E1WUqM0efK4kI9oTqDm6XmK8ZPe2djZ90BSNdGnIyCLzCPw7/pogPlGbzI2wHGGmi4O/Q==}
 
@@ -1869,6 +1886,13 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
+  cookie-parser@1.4.7:
+    resolution: {integrity: sha512-nGUvgXnotP3BsjiLX2ypbQnWoGUPIIfHQNZkkC668ntrzGWEZVW70HDEB1qnNGMicPje6EttlIgzo51YSwNQGw==}
+    engines: {node: '>= 0.8.0'}
+
+  cookie-signature@1.0.6:
+    resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
+
   cookie-signature@1.2.2:
     resolution: {integrity: sha512-D76uU73ulSXrD1UXF4KE2TMxVVwhsnCgfAyTg9k8P6KGZjlXKrOLe4dJQKI3Bxi5wjesZoFXJWElNWBjPZMbhg==}
     engines: {node: '>=6.6.0'}
@@ -1909,6 +1933,9 @@ packages:
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
+
+  csrf-csrf@4.0.3:
+    resolution: {integrity: sha512-DaygOzelL4Qo1pHwI9LPyZL+X2456/OzpT596kNeZGiTSqKVDOk/9PPJ+FjzZacjMUEusOHw3WJKe1RW4iUhrw==}
 
   data-view-buffer@1.0.2:
     resolution: {integrity: sha512-EmKO5V3OLXh1rtK2wgXRansaK1/mtVdTUEiEI0W8RkvgT05kfxaH29PliLnpLP73yYO6142Q72QNa8Wx/A5CqQ==}
@@ -2506,6 +2533,10 @@ packages:
 
   heap@0.2.7:
     resolution: {integrity: sha512-2bsegYkkHO+h/9MGbn6KWcE45cHZgPANo5LXF7EvWdT0yT2EguSVO1nDgU5c8+ZOPwp2vMNa7YFsJhVcDR9Sdg==}
+
+  helmet@8.1.0:
+    resolution: {integrity: sha512-jOiHyAZsmnr8LqoPGmCjYAaiuWwjAPLgY8ZX2XrmHawt99/u1y6RgrZMTeoPfpUbV96HOalYgz1qzkRbw54Pmg==}
+    engines: {node: '>=18.0.0'}
 
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
@@ -5260,6 +5291,10 @@ snapshots:
     dependencies:
       '@types/node': 22.19.11
 
+  '@types/cookie-parser@1.4.10(@types/express@5.0.6)':
+    dependencies:
+      '@types/express': 5.0.6
+
   '@types/cookiejar@2.1.5': {}
 
   '@types/difflib@0.2.7': {}
@@ -6092,6 +6127,13 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
+  cookie-parser@1.4.7:
+    dependencies:
+      cookie: 0.7.2
+      cookie-signature: 1.0.6
+
+  cookie-signature@1.0.6: {}
+
   cookie-signature@1.2.2: {}
 
   cookie@0.7.2: {}
@@ -6129,6 +6171,10 @@ snapshots:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  csrf-csrf@4.0.3:
+    dependencies:
+      http-errors: 2.0.1
 
   data-view-buffer@1.0.2:
     dependencies:
@@ -6843,6 +6889,8 @@ snapshots:
       function-bind: 1.1.2
 
   heap@0.2.7: {}
+
+  helmet@8.1.0: {}
 
   html-escaper@2.0.2: {}
 

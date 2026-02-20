@@ -22,10 +22,10 @@ export class WhisperService {
   private readonly whisperApiUrl: string
   constructor(
     private readonly httpService: HttpService,
-    private readonly configService: SharedConfigService,
+    private readonly sharedConfigService: SharedConfigService,
     private readonly audioValidator: AudioValidationService
   ) {
-    this.whisperApiUrl = this.configService.getOrThrow('WHISPER_LOCAL_API_URL')
+    this.whisperApiUrl = this.sharedConfigService.getOrThrow('WHISPER_LOCAL_API_URL')
   }
   /**
    * 轉錄語音 (含驗證)

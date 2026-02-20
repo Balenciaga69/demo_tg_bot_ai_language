@@ -1,3 +1,4 @@
+/** 環境變數 Keys, 包含所有應用程式所需的環境變數 */
 export type EnvironmentKey =
   | 'TELEGRAM_BOT_TOKEN'
   | 'TELEGRAM_CONNECT_MODE'
