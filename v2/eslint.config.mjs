@@ -32,7 +32,7 @@ export default tseslint.config(
         ...globals.node,
         ...globals.jest,
       },
-      sourceType: 'commonjs',
+      sourceType: 'module',
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
@@ -85,7 +85,7 @@ export default tseslint.config(
   },
   {
     // Relax strict TypeScript rules for shared/audio (Buffer/dynamic imports)
-    files: ['shared/audio/**/*.ts'],
+    files: ['libs/shared/src/audio/**/*.ts'],
     rules: {
       '@typescript-eslint/no-unsafe-call': 'warn',
       '@typescript-eslint/no-unsafe-member-access': 'warn',

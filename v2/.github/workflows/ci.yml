@@ -50,7 +50,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run ESLint (workspace)
-        run: pnpm -r lint
+        run: npm run lint
 
   test:
     name: Unit tests + coverage
@@ -85,7 +85,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run unit tests (per-package)
-        run: pnpm -r test -- --coverage
+        run: npm run test -- --coverage
 
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4
@@ -125,7 +125,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build (per-package)
-        run: pnpm -r build
+        run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4

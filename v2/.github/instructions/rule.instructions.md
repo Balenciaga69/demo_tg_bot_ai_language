@@ -32,7 +32,8 @@ applyTo: '**'
 
 # 若有需要
 
-- 執行以下指令來檢查專案的 lint 和 build 是否正常
+- 如果是生成跟 nestjs 高度關聯的東西 請使用 cli 指令 來生成, 不要自行添加
+- 執行以下指令來檢查專案的 lint 和 build 是否正常 (一口氣執行 不用拆分)
 
 ```bash
 Write-Host "=== [1/3] npm run lint ==="
