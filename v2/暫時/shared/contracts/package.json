@@ -1,0 +1,20 @@
+{
+  "name": "@xx/shared-contracts",
+  "version": "0.0.1",
+  "private": true,
+  "type": "commonjs",
+  "main": "../../dist/shared/contracts/index.js",
+  "types": "../../dist/shared/contracts/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "../../dist/shared/contracts/index.d.ts",
+      "require": "../../dist/shared/contracts/index.js",
+      "import": "../../dist/shared/contracts/index.js"
+    }
+  },
+  "scripts": {
+    "lint": "eslint src/**/*.ts",
+    "test": "jest",
+    "build": "nest build contracts"
+  }
+}

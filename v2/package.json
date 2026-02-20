@@ -6,32 +6,27 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "pnpm -r build",
-    "build:watch": "tsc --watch",
+    "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start:dev": "pnpm --parallel --filter \"telegram-bot\" --filter \"stt-service\" start:dev",
-    "start": "pnpm run build && pnpm --parallel --filter \"telegram-bot\" --filter \"stt-service\" start",
-    "start:telegram": "node dist/apps/telegram-bot/main.js",
-    "start:telegram:dev": "nest start telegram-bot --watch",
-    "start:telegram:debug": "nest start telegram-bot --debug --watch",
-    "start:stt": "node dist/apps/stt-service/main.js",
-    "start:stt:dev": "nest start stt-service --watch",
-    "lint": "pnpm -r lint",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"./src/**/*.ts\"",
     "lint:fix": "eslint \"./src/**/*.ts\" --fix",
-    "test": "pnpm -r test",
+    "test": "jest",
     "test:watch": "jest --watch",
-    "test:cov": "pnpm -r test -- --coverage",
+    "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "docker:build": "docker build -t nest-whisper-api:latest .",
-    "docker:up": "docker-compose -f docker-compose.yml up -d",
-    "docker:down": "docker-compose down"
+    "docker:up": "docker-compose -f ../docker-compose.prod.yml up -d",
+    "docker:down": "docker-compose -f ../docker-compose.prod.yml down"
   },
   "dependencies": {
     "@grammyjs/conversations": "^2.1.1",
     "@grammyjs/ratelimiter": "^1.2.1",
     "@nestjs/axios": "^4.0.1",
-    "@nestjs/microservices": "^11.0.1",
     "@nestjs/bullmq": "^11.0.2",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
@@ -111,12 +106,6 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node",
-    "moduleNameMapper": {
-      "^@shared/audio$": "<rootDir>/../shared/audio/src/index.ts",
-      "^@shared/audio/(.*)$": "<rootDir>/../shared/audio/src/$1",
-      "^@shared/contracts$": "<rootDir>/../shared/contracts/src/index.ts",
-      "^@shared/contracts/(.*)$": "<rootDir>/../shared/contracts/src/$1"
-    }
+    "testEnvironment": "node"
   }
 }

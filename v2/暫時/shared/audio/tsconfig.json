@@ -2,7 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "../../dist/shared/audio"
+    "outDir": "../../dist/shared/audio",
+    "declaration": true,
+    "declarationMap": true
   },
   "include": ["src"]
 }
