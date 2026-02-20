@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common'
 import { HttpModule } from '@nestjs/axios'
-import { ConfigModule } from '@nestjs/config'
+import { SharedConfigModule } from '@shared/config/config.module'
 import { AudioModule } from '@shared/audio'
 import { WhisperController } from './whisper.controller'
 import { WhisperService } from './whisper.service'
-
 @Module({
-  imports: [HttpModule, ConfigModule, AudioModule],
+  imports: [HttpModule, SharedConfigModule, AudioModule],
   controllers: [WhisperController],
   providers: [WhisperService],
 })

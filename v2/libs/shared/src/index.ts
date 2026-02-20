@@ -1,2 +1,5 @@
 export * from './audio'
 export * from './contracts'
+export * from './config/config.module'
+export * from './config/config.service'
+export * as ENV_KEYS from './config/environment.keys'

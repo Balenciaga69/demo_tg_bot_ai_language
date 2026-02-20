@@ -7,12 +7,10 @@ import { of } from 'rxjs'
 import { Bot } from 'grammy'
 import { STT_SERVICE_TOKEN } from '@shared/contracts'
 import { TelegramBotService } from './telegram-bot.service'
-
 describe('TelegramBotService 服務 (telegram-bot)', () => {
   let service: TelegramBotService
   let mockBot: jest.Mocked<Bot>
   let mockSttClient: jest.Mocked<ClientProxy>
-
   beforeEach(async () => {
     mockBot = {
       start: jest.fn().mockResolvedValue(undefined),
@@ -22,12 +20,10 @@ describe('TelegramBotService 服務 (telegram-bot)', () => {
       on: jest.fn(),
       token: 'test-token',
     } as unknown as jest.Mocked<Bot>
-
     mockSttClient = {
       send: jest.fn().mockReturnValue(of({ success: true, text: '測試轉錄結果' })),
       emit: jest.fn(),
     } as unknown as jest.Mocked<ClientProxy>
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TelegramBotService,
@@ -35,14 +31,11 @@ describe('TelegramBotService 服務 (telegram-bot)', () => {
         { provide: STT_SERVICE_TOKEN, useValue: mockSttClient },
       ],
     }).compile()
-
     service = module.get<TelegramBotService>(TelegramBotService)
   })
-
   afterEach(() => {
     jest.clearAllMocks()
   })
-
   describe('onModuleInit（模組初始化）', () => {
     it('應註冊指令、語音處理器、套用節流中介並啟動 bot', async () => {
       await service.onModuleInit()
@@ -52,7 +45,6 @@ describe('TelegramBotService 服務 (telegram-bot)', () => {
       expect(mockBot.start).toHaveBeenCalled()
     })
   })
-
   describe('onModuleDestroy（模組銷毀）', () => {
     it('應停止 bot', async () => {
       await service.onModuleDestroy()
