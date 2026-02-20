@@ -1,23 +1,19 @@
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { Bot } from 'grammy'
-import { TelegramService } from './telegram.service'
-
+import { TelegramBotService } from './telegram-bot.service'
 @Module({
   providers: [
     {
       provide: Bot,
       useFactory: (config: ConfigService) => {
-        const token = config.get<string>('TELEGRAM_BOT_TOKEN')
-        if (!token) {
-          throw new Error('TELEGRAM_BOT_TOKEN is not set')
-        }
+        const token = config.getOrThrow<string>('TELEGRAM_BOT_TOKEN')
         return new Bot(token)
       },
       inject: [ConfigService],
     },
-    TelegramService,
+    TelegramBotService,
   ],
-  exports: [TelegramService, Bot],
+  exports: [TelegramBotService],
 })
 export class TelegramModule {}
