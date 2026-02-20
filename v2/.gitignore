@@ -4,6 +4,11 @@ dist/
 logs/
 *.log
 
+# TypeScript compiled output (should not be in src)
+**/*.js
+**/*.js.map
+**/*.d.ts
+
 # Environment
 .env
 .env.local

@@ -2,7 +2,8 @@
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "outDir": "dist"
   },
   "projects": {
     "telegram-bot": {
@@ -11,7 +12,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/telegram-bot/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/telegram-bot/tsconfig.json"
+        "tsConfigPath": "apps/telegram-bot/tsconfig.json",
+        "outDir": "dist/apps/telegram-bot"
       }
     },
     "stt-service": {
@@ -20,7 +22,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/stt-service/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/stt-service/tsconfig.json"
+        "tsConfigPath": "apps/stt-service/tsconfig.json",
+        "outDir": "dist/apps/stt-service"
       }
     }
   }

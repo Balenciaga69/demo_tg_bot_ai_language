@@ -7,9 +7,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "pnpm -r build",
+    "build:watch": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start:dev": "pnpm run --parallel start:telegram:dev start:stt:dev",
-    "start": "pnpm run --parallel start:telegram start:stt",
+    "start:dev": "pnpm --parallel --filter \"telegram-bot\" --filter \"stt-service\" start:dev",
+    "start": "pnpm run build && pnpm --parallel --filter \"telegram-bot\" --filter \"stt-service\" start",
     "start:telegram": "node dist/apps/telegram-bot/main.js",
     "start:telegram:dev": "nest start telegram-bot --watch",
     "start:telegram:debug": "nest start telegram-bot --debug --watch",

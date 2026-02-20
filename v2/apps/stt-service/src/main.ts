@@ -1,3 +1,5 @@
+import 'tsconfig-paths/register'
+
 import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { SttAppModule } from './app.module'
