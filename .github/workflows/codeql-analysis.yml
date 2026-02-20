@@ -3,8 +3,13 @@ name: 'CodeQL Scan'
 on:
   push:
     branches: [main]
+    paths:
+      - 'v2/**'
+      - '.github/workflows/codeql-analysis.yml'
   pull_request:
     branches: ['**']
+    paths:
+      - 'v2/**'
   schedule:
     - cron: '0 3 * * 0' # weekly
 
@@ -16,6 +21,9 @@ jobs:
   codeql:
     name: Analyze
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: v2
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,7 +42,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
 
       - name: Cache pnpm store
         uses: actions/cache@v4
