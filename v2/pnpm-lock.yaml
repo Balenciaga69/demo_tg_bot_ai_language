@@ -205,17 +205,17 @@ importers:
         specifier: ^8.20.0
         version: 8.55.0(eslint@9.39.2)(typescript@5.9.3)
 
-  apps/api-gateway:
-    dependencies:
-      '@xx/shared-contracts':
-        specifier: workspace:*
-        version: link:../../shared/contracts
-
   apps/stt-service:
     dependencies:
       '@xx/shared-audio':
         specifier: workspace:*
         version: link:../../shared/audio
+      '@xx/shared-contracts':
+        specifier: workspace:*
+        version: link:../../shared/contracts
+
+  apps/telegram-bot:
+    dependencies:
       '@xx/shared-contracts':
         specifier: workspace:*
         version: link:../../shared/contracts

@@ -8,7 +8,7 @@ import { Bot } from 'grammy'
 import { STT_SERVICE_TOKEN } from '@shared/contracts'
 import { TelegramBotService } from './telegram-bot.service'
 
-describe('TelegramBotService 服務 (api-gateway)', () => {
+describe('TelegramBotService 服務 (telegram-bot)', () => {
   let service: TelegramBotService
   let mockBot: jest.Mocked<Bot>
   let mockSttClient: jest.Mocked<ClientProxy>

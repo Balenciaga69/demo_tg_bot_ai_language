@@ -5,13 +5,13 @@
     "deleteOutDir": true
   },
   "projects": {
-    "api-gateway": {
+    "telegram-bot": {
       "type": "application",
-      "root": "apps/api-gateway",
+      "root": "apps/telegram-bot",
       "entryFile": "main",
-      "sourceRoot": "apps/api-gateway/src",
+      "sourceRoot": "apps/telegram-bot/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/api-gateway/tsconfig.json"
+        "tsConfigPath": "apps/telegram-bot/tsconfig.json"
       }
     },
     "stt-service": {

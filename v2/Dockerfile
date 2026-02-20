@@ -20,8 +20,8 @@ COPY . .
 # 構建所有 packages
 RUN pnpm -r -w build
 
-# === Stage 2: API Gateway Runtime ===
-FROM node:18-alpine AS api-gateway
+# === Stage 2: Telegram Bot Runtime ===
+FROM node:18-alpine AS telegram-bot
 
 WORKDIR /app
 
@@ -36,7 +36,7 @@ COPY package.json ./
 RUN pnpm install --frozen-lockfile --prod
 
 # 複製 package.json 檔案
-COPY apps/api-gateway/package.json ./apps/api-gateway/
+COPY apps/telegram-bot/package.json ./apps/telegram-bot/
 COPY shared/contracts/package.json ./shared/contracts/
 
 # 複製編譯輸出
@@ -45,8 +45,8 @@ COPY --from=builder /app/dist ./dist
 # 設定工作目錄與暴露埠口
 EXPOSE 3399
 
-# 啟動 api-gateway
-CMD ["node", "dist/apps/api-gateway/main.js"]
+# 啟動 telegram-bot
+CMD ["node", "dist/apps/telegram-bot/main.js"]
 
 # === Stage 3: STT Service Runtime ===
 FROM node:18-alpine AS stt-service
