@@ -3,7 +3,8 @@ import { HttpService } from '@nestjs/axios'
 import { ConfigService } from '@nestjs/config'
 import { firstValueFrom } from 'rxjs'
 import FormData from 'form-data'
-import { AudioValidationService } from '../../shared/audio/audio-validation.service'
+import { AudioValidationService } from '@shared/audio'
+
 /**
  * Whisper 轉錄結果
  */
@@ -13,6 +14,7 @@ export interface WhisperTranscribeResult {
   error?: string
   duration?: number
 }
+
 /**
  * Whisper 服務 - 音頻轉文字
  */
@@ -20,19 +22,19 @@ export interface WhisperTranscribeResult {
 export class WhisperService {
   private readonly logger = new Logger(WhisperService.name)
   private readonly whisperApiUrl: string
+
   constructor(
     private readonly httpService: HttpService,
     private readonly configService: ConfigService,
     private readonly audioValidator: AudioValidationService
   ) {
-    // Fake: 從環境變數讀取，如果沒有則使用預設值
     this.whisperApiUrl = this.configService.getOrThrow<string>('WHISPER_API_URL')
   }
+
   /**
    * 轉錄語音 (含驗證)
    * @param language 語言代碼 (e.g., 'zh', 'en')
    * @param buffer 音頻 Buffer
-   * @returns 轉錄結果
    */
   async transcribe(language: string, buffer: Buffer): Promise<WhisperTranscribeResult> {
     try {
@@ -44,6 +46,7 @@ export class WhisperService {
           error: validation.errors.join(', '),
         }
       }
+
       // 2️⃣ 調用 Whisper API
       const text = await this.callWhisperApi(language, buffer)
       return {
@@ -60,10 +63,7 @@ export class WhisperService {
       }
     }
   }
-  /**
-   * 調用 Whisper API
-   * @private
-   */
+
   private async callWhisperApi(language: string, buffer: Buffer): Promise<string> {
     const formData = new FormData()
     const fileName = `audio_${Date.now()}.mp3`
@@ -76,6 +76,7 @@ export class WhisperService {
     formData.append('response_format', 'text')
     formData.append('temperature', 0)
     formData.append('stream', 'false')
+
     try {
       const result = await firstValueFrom(
         this.httpService.post<string>(this.whisperApiUrl, formData, {

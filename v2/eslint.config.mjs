@@ -82,5 +82,15 @@ export default tseslint.config(
       'unicorn/import-style': 'warn',
       'unicorn/prefer-regexp-test': 'warn',
     },
+  },
+  {
+    // Relax strict TypeScript rules for shared/audio (Buffer/dynamic imports)
+    files: ['shared/audio/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-unsafe-call': 'warn',
+      '@typescript-eslint/no-unsafe-member-access': 'warn',
+      '@typescript-eslint/no-unsafe-assignment': 'warn',
+      '@typescript-eslint/no-unsafe-argument': 'warn',
+    },
   }
 )

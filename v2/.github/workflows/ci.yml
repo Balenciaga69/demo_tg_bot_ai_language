@@ -49,8 +49,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run ESLint
-        run: pnpm lint
+      - name: Run ESLint (workspace)
+        run: pnpm -r lint
 
   test:
     name: Unit tests + coverage
@@ -84,14 +84,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run unit tests (Jest)
-        run: pnpm test -- --coverage
+      - name: Run unit tests (per-package)
+        run: pnpm -r test -- --coverage
 
-      - name: Upload coverage report
+      - name: Upload coverage reports
         uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.node-version }}
-          path: coverage
+          path: |
+            **/coverage
 
   build:
     name: Build (type-check + compile)
@@ -123,14 +124,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build (nest compile / tsc)
-        run: pnpm build
+      - name: Build (per-package)
+        run: pnpm -r build
 
-      - name: Upload build artifact
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: dist
+          path: |
+            **/dist
 
   e2e:
     name: e2e (optional, run on main or manual)
