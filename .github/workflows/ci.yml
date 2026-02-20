@@ -4,9 +4,14 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'v2/**'
+      - '.github/workflows/ci.yml'
   pull_request:
     branches:
       - '**'
+    paths:
+      - 'v2/**'
   workflow_dispatch: {}
 
 concurrency:
@@ -18,6 +23,10 @@ permissions:
 
 env:
   CI: true
+
+defaults:
+  run:
+    working-directory: v2
 
 jobs:
   lint:
@@ -31,12 +40,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
 
       - name: Cache pnpm store
         uses: actions/cache@v4
@@ -57,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [20.x]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -71,7 +80,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
 
       - name: Cache pnpm store
         uses: actions/cache@v4
@@ -106,12 +115,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
 
       - name: Cache pnpm store
         uses: actions/cache@v4
@@ -147,12 +156,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
