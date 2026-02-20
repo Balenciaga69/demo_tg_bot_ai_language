@@ -1,8 +1,41 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/stt-service/src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/stt-service/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/stt-service",
+  "projects": {
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
+    },
+    "stt-service": {
+      "type": "application",
+      "root": "apps/stt-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/stt-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/stt-service/tsconfig.app.json"
+      }
+    },
+    "telegram-bot": {
+      "type": "application",
+      "root": "apps/telegram-bot",
+      "entryFile": "main",
+      "sourceRoot": "apps/telegram-bot/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/telegram-bot/tsconfig.app.json"
+      }
+    }
   }
 }

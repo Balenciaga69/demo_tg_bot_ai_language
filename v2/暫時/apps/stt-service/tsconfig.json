@@ -1,8 +1,0 @@
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "../../dist/apps/stt-service"
-  },
-  "include": ["src"]
-}

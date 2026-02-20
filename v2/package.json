@@ -7,21 +7,22 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
-    "lint": "eslint \"./src/**/*.ts\"",
-    "lint:fix": "eslint \"./src/**/*.ts\" --fix",
+    "start:prod": "node dist/apps/stt-service/main",
+    "start:stt": "nest start stt-service",
+    "start:stt:dev": "nest start stt-service --watch",
+    "start:bot": "nest start telegram-bot",
+    "start:bot:dev": "nest start telegram-bot --watch",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "docker:build": "docker build -t nest-whisper-api:latest .",
-    "docker:up": "docker-compose -f ../docker-compose.prod.yml up -d",
-    "docker:down": "docker-compose -f ../docker-compose.prod.yml down"
+    "test:e2e": "jest --config apps/stt-service/test/jest-e2e.json"
   },
   "dependencies": {
     "@grammyjs/conversations": "^2.1.1",
@@ -31,6 +32,7 @@
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/microservices": "^11.1.14",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/swagger": "^11.2.5",
     "@nestjs/throttler": "^6.5.0",
@@ -97,7 +99,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -105,7 +107,14 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/apps/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@shared(|/.*)$": "<rootDir>/libs/shared/src/$1"
+    }
   }
 }
