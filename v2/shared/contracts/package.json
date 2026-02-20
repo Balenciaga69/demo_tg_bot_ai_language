@@ -1,0 +1,10 @@
+{
+  "name": "@xx/shared-contracts",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "eslint src/**/*.ts",
+    "test": "jest"
+  }
+}
