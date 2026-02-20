@@ -1,0 +1,37 @@
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api-gateway
+    container_name: xx-nest-api-gateway
+    ports:
+      - '3399:3399'
+    environment:
+      - NODE_ENV=production
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CONNECT_MODE=long-polling
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  stt-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: stt-service
+    container_name: xx-nest-stt-service
+    environment:
+      - NODE_ENV=production
+      - WHISPER_API_URL=http://whisper-api:8000/api/transcribe
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      redis:
+        condition: service_healthy
+      whisper-api:
+        condition: service_started
+    restart: unless-stopped
