@@ -14,6 +14,8 @@ export type EnvironmentKey =
   | 'REDIS_PORT'
   | 'REDIS_PASSWORD'
   | 'REDIS_DB'
+  | 'STT_TCP_HOST'
+  | 'STT_TCP_PORT'
   | 'WHISPER_LOCAL_API_URL'
   | 'AZURE_SPEECH_KEY'
   | 'AZURE_SPEECH_REGION'
