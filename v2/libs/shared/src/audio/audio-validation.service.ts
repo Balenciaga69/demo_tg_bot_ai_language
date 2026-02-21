@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { parseBuffer } from 'music-metadata'
 /**
  * 音訊驗證結果 (回傳給調用方)
  */
@@ -97,8 +98,6 @@ export class AudioValidationService {
   private async checkDuration(audioBuffer: Buffer, mimeType: string | undefined): Promise<number | undefined> {
     if (!Buffer.isBuffer(audioBuffer)) return undefined
     try {
-      // eslint-disable-next-line import/no-dynamic-require
-      const { parseBuffer } = await import('music-metadata')
       const metadata = await parseBuffer(audioBuffer, { mimeType, size: audioBuffer.length }, { duration: true })
       const duration = metadata.format.duration
       if (!duration || Number.isNaN(duration)) {

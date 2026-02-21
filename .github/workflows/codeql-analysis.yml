@@ -1,5 +1,8 @@
+# CodeQL 掃描工作流程
+# 此工作流程用於掃描專案程式碼中的安全漏洞。
 name: 'CodeQL Scan'
 
+# 當以下事件發生時觸發此工作流程
 on:
   push:
     branches: [main]
@@ -10,41 +13,43 @@ on:
     branches: ['**']
     paths:
       - 'v2/**'
+  # 每週日凌晨 3 點執行掃描
   schedule:
     - cron: '0 3 * * 0' # weekly
 
+# 定義工作流程的權限
 permissions:
   contents: read
   security-events: write
 
 jobs:
   codeql:
-    name: Analyze
+    name: Analyze # 分析程式碼的安全漏洞
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: v2
+        working-directory: v2 # 在 v2 目錄下執行命令
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # 檢查程式碼
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup Node.js # 設定 Node.js 環境
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Initialize CodeQL
+      - name: Initialize CodeQL # 初始化 CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: javascript
 
-      - name: Setup pnpm
+      - name: Setup pnpm # 設定 pnpm 套件管理器
         uses: pnpm/action-setup@v2
         with:
           version: 9
 
-      - name: Cache pnpm store
+      - name: Cache pnpm store # 快取 pnpm 以加速依賴安裝
         uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
@@ -52,11 +57,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
+      - name: Install dependencies # 安裝專案依賴
         run: pnpm install --frozen-lockfile
 
-      - name: Autobuild
+      - name: Autobuild # 自動建置專案
         uses: github/codeql-action/autobuild@v2
 
-      - name: Perform CodeQL analysis
+      - name: Perform CodeQL analysis # 執行 CodeQL 分析
         uses: github/codeql-action/analyze@v2

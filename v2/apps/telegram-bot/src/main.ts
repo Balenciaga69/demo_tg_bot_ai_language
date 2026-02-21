@@ -2,6 +2,7 @@ import 'tsconfig-paths/register'
 import { INestApplication } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import { setupSecurity } from '@shared'
 import { ApiGatewayModule } from './app.module'
 /** 設置 Swagger API 文件 */
 const setupSwagger = (app: INestApplication): void => {
@@ -13,6 +14,7 @@ const setupSwagger = (app: INestApplication): void => {
 void bootstrap()
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(ApiGatewayModule)
+  setupSecurity(app)
   setupSwagger(app)
   await app.listen(3399)
   console.log('API Gateway is running on: http://localhost:3399')

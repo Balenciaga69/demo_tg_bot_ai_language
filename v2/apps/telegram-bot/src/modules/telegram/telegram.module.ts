@@ -11,13 +11,20 @@ import { TelegramBotService } from './telegram-bot.service'
       {
         name: STT_SERVICE_TOKEN,
         imports: [SharedConfigModule],
-        useFactory: (config: SharedConfigService) => ({
-          transport: Transport.REDIS,
-          options: {
-            host: config.getOrThrow<string>('REDIS_HOST'),
-            port: config.getOrThrow<number>('REDIS_PORT'),
-          },
-        }),
+        useFactory: (config: SharedConfigService) => {
+          const sttTcpHost = config.getOrThrow<string>('STT_TCP_HOST')
+          const sttTcpPort = Number(config.getOrThrow<string>('STT_TCP_PORT'))
+          if (Number.isNaN(sttTcpPort)) {
+            throw new TypeError('STT_TCP_PORT must be a number')
+          }
+          return {
+            transport: Transport.TCP,
+            options: {
+              host: sttTcpHost,
+              port: sttTcpPort,
+            },
+          }
+        },
         inject: [SharedConfigService],
       },
     ]),

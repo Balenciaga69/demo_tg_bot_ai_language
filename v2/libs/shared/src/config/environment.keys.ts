@@ -1,3 +1,4 @@
+/** 環境變數 Keys, 包含所有應用程式所需的環境變數 */
 export type EnvironmentKey =
   | 'TELEGRAM_BOT_TOKEN'
   | 'TELEGRAM_CONNECT_MODE'
@@ -13,6 +14,8 @@ export type EnvironmentKey =
   | 'REDIS_PORT'
   | 'REDIS_PASSWORD'
   | 'REDIS_DB'
+  | 'STT_TCP_HOST'
+  | 'STT_TCP_PORT'
   | 'WHISPER_LOCAL_API_URL'
   | 'AZURE_SPEECH_KEY'
   | 'AZURE_SPEECH_REGION'

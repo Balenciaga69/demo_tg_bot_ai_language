@@ -1,5 +1,8 @@
-name: CI
-
+# CI 工作流程
+# 用途：在 CI 上執行 lint / test / build / e2e 並上傳產物（簡短註解，方便快速導覽）
+name:
+  CI
+  # 觸發條件：push / pull_request / 手動觸發
 on:
   push:
     branches:
@@ -14,53 +17,62 @@ on:
       - 'v2/**'
   workflow_dispatch: {}
 
+# 併發控制：避免同一分支同時跑多個工作流程
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# 權限：只需讀取內容
 permissions:
   contents: read
 
+# 環境變數
 env:
   CI: true
 
+# 預設工作目錄：在 v2 下執行命令
 defaults:
   run:
     working-directory: v2
 
+# 工作清單（簡短標註於每個 job）
 jobs:
+  # Lint (ESLint): 檢查程式碼風格
   lint:
     name: Lint (ESLint)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # 檢出程式碼
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup Node.js # 設定 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Setup pnpm
+      - name: Setup pnpm # 設定 pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9
 
-      - name: Cache pnpm store
+      - name: Cache pnpm store # 快取 pnpm 以加速安裝
         uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
+          # 系統 + pnpm + lockfile 內容變化都會觸發快取失效
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          # 還原快取時，允許只匹配到系統 + pnpm 的快取（不要求 lockfile 完全匹配）
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
+      - name: Install dependencies # 安裝相依套件
         run: pnpm install --frozen-lockfile
 
-      - name: Run ESLint (workspace)
+      - name: Run ESLint (workspace) # 執行 ESLint
         run: npm run lint
 
+  # Test: 執行單元測試並產生 coverage
   test:
     name: Unit tests + coverage
     runs-on: ubuntu-latest
@@ -68,21 +80,21 @@ jobs:
       matrix:
         node-version: [20.x]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # 檢出程式碼
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup Node.js # 設定 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Setup pnpm
+      - name: Setup pnpm # 設定 pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9
 
-      - name: Cache pnpm store
+      - name: Cache pnpm store # 快取 pnpm
         uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
@@ -90,39 +102,40 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
+      - name: Install dependencies # 安裝相依套件
         run: pnpm install --frozen-lockfile
 
-      - name: Run unit tests (per-package)
+      - name: Run unit tests (per-package) # 執行單元測試
         run: npm run test -- --coverage
 
-      - name: Upload coverage reports
+      - name: Upload coverage reports # 上傳 coverage
         uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.node-version }}
           path: |
             **/coverage
 
+  # Build: 型別檢查與編譯
   build:
     name: Build (type-check + compile)
     runs-on: ubuntu-latest
     needs: [lint, test]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # 檢出程式碼
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup Node.js # 設定 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Setup pnpm
+      - name: Setup pnpm # 設定 pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9
 
-      - name: Cache pnpm store
+      - name: Cache pnpm store # 快取 pnpm
         uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
@@ -130,41 +143,43 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
+      - name: Install dependencies # 安裝相依套件
         run: pnpm install --frozen-lockfile
 
-      - name: Build (per-package)
+      - name: Build (per-package) # 執行建置（含型別檢查）
         run: npm run build
 
-      - name: Upload build artifacts
+      - name: Upload build artifacts # 上傳 dist
         uses: actions/upload-artifact@v4
         with:
           name: dist
           path: |
             **/dist
 
+  # e2e (選擇性)：在 main 或手動觸發時執行 end-to-end 測試
   e2e:
     name: e2e (optional, run on main or manual)
     runs-on: ubuntu-latest
+    # 如果: 只有在 main 分支或手動觸發時才執行 e2e 測試，避免在 feature 分支浪費資源
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # 檢出程式碼
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup Node.js # 設定 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Setup pnpm
+      - name: Setup pnpm # 設定 pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9
 
-      - name: Install dependencies
+      - name: Install dependencies # 安裝相依套件
         run: pnpm install --frozen-lockfile
 
-      - name: Run e2e tests
+      - name: Run e2e tests # 執行 e2e 測試
         run: pnpm test:e2e
