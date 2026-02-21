@@ -29,6 +29,7 @@ applyTo: '**'
 
 - https://core.telegram.org/bots/api
 - https://grammy.dev/
+- https://docs.nestjs.com/
 
 # 若有需要
 
@@ -43,16 +44,12 @@ Write-Host $lintResult
 Write-Host "Exit Code: $lintExitCode"
 Write-Host "`n"
 
-
-
 Write-Host "=== [2/3] npm run build ==="
 $buildResult = & cmd /c "npm run build" 2>&1
 $buildExitCode = $LASTEXITCODE
 Write-Host $buildResult
 Write-Host "Exit Code: $buildExitCode"
 Write-Host "`n"
-
-
 
 Write-Host "=== [3/3] npm run test ==="
 $testResult = & cmd /c "npm run test" 2>&1
