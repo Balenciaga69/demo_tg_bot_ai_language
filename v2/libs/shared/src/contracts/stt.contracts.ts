@@ -1,5 +1,4 @@
-/** STT 服務消息模式 */
-export const STT_SERVICE_TOKEN = 'STT_SERVICE'
+export const STT_SERVICE_TOKEN = 'STT_SERVICE' as const
 export const STT_PATTERNS = {
   TRANSCRIBE: { cmd: 'stt.transcribe' },
 } as const
