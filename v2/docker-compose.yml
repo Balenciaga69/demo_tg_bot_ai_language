@@ -86,7 +86,7 @@ services:
     depends_on:
       - ollama
 
-  # Ollama 圖形介面
+  # Ollama 圖形介面(這我不需要)
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: xx-nest-webui

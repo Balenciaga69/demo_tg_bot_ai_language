@@ -12,12 +12,12 @@ describe('ConfigService', () => {
           provide: NestConfigService,
           useValue: {
             getOrThrow: jest.fn((key: string) => {
-              const mockEnv: Record<string, string> = {
+              const mockEnvironment: Record<string, string> = {
                 TELEGRAM_BOT_TOKEN: 'test-token',
                 REDIS_HOST: 'localhost',
                 REDIS_PORT: '6379',
               }
-              return mockEnv[key] ?? null
+              return mockEnvironment[key] ?? null
             }),
           },
         },

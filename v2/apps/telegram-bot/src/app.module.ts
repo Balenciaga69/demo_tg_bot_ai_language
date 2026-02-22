@@ -6,4 +6,4 @@ import { TelegramModule } from './modules/telegram/telegram.module'
   imports: [SharedConfigModule, TelegramModule],
   controllers: [AppController],
 })
-export class ApiGatewayModule {}
+export class AppModule {}

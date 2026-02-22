@@ -77,7 +77,6 @@ export class AudioValidationService {
   private async detectMimeType(buffer: Buffer): Promise<string | undefined> {
     if (!Buffer.isBuffer(buffer) || buffer.length < 4) return undefined
     try {
-      // eslint-disable-next-line import/no-dynamic-require
       const { fileTypeFromBuffer } = await import('file-type')
       const ft = await fileTypeFromBuffer(buffer)
       return ft?.mime
