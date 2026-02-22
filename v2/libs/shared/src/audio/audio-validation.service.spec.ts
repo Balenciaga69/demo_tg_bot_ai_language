@@ -1,3 +1,4 @@
+jest.mock('music-metadata')
 import { AudioValidationConstants, AudioValidationService } from './audio-validation.service'
 describe('AudioValidationService', () => {
   const service = new AudioValidationService()
