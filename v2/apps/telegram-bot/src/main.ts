@@ -1,9 +1,13 @@
+// ✅ 必須在任何其他 import 之前！
+import { initTelemetry } from '@shared/monitoring'
+initTelemetry('telegram-bot')
+
 import 'tsconfig-paths/register'
 import { INestApplication } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { setupSecurity } from '@shared'
-import { ApiGatewayModule } from './app.module'
+import { AppModule } from './app.module'
 /** 設置 Swagger API 文件 */
 const setupSwagger = (app: INestApplication): void => {
   const config = new DocumentBuilder().setTitle('語音學習 API Gateway').setVersion('1.0').addBearerAuth().build()
@@ -13,7 +17,7 @@ const setupSwagger = (app: INestApplication): void => {
 // eslint-disable-next-line unicorn/prefer-top-level-await
 void bootstrap()
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(ApiGatewayModule)
+  const app = await NestFactory.create(AppModule)
   setupSecurity(app)
   setupSwagger(app)
   await app.listen(3399)

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable unicorn/no-useless-undefined */
-/* eslint-disable max-lines-per-function */
+
 import { Test, TestingModule } from '@nestjs/testing'
 import { ClientProxy } from '@nestjs/microservices'
 import { of } from 'rxjs'
