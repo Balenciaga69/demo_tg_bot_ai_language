@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "packages",
+  "monorepo": true,
+  "root": "packages/api-gateway",
+  "compilerOptions": {
+    "tsConfigPath": "packages/api-gateway/tsconfig.app.json"
+  },
+  "projects": {
+    "api-gateway": {
+      "type": "application",
+      "root": "packages/api-gateway",
+      "entryFile": "main",
+      "sourceRoot": "packages/api-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "packages/api-gateway/tsconfig.app.json"
+      }
+    },
+    "stats-service": {
+      "type": "application",
+      "root": "packages/stats-service",
+      "entryFile": "main",
+      "sourceRoot": "packages/stats-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "packages/stats-service/tsconfig.app.json"
+      }
+    },
+    "transform-service": {
+      "type": "application",
+      "root": "packages/transform-service",
+      "entryFile": "main",
+      "sourceRoot": "packages/transform-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "packages/transform-service/tsconfig.app.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "packages/shared",
+      "entryFile": "index",
+      "sourceRoot": "packages/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "packages/shared/tsconfig.lib.json"
+      }
+    }
+  }
+}
