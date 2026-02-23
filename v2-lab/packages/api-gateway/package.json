@@ -1,0 +1,13 @@
+{
+  "name": "@v2-lab/api-gateway",
+  "version": "0.0.1",
+  "description": "API Gateway - HTTP entry point and result aggregation",
+  "private": true,
+  "scripts": {
+    "build": "nest build api-gateway",
+    "start:dev": "nest start api-gateway --watch"
+  },
+  "dependencies": {
+    "@v2-lab/shared": "workspace:*"
+  }
+}

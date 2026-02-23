@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2021",
+    "lib": ["ES2021"],
+    "outDir": "./dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@app-gateway/*": ["packages/api-gateway/src/*"],
+      "@stats-service/*": ["packages/stats-service/src/*"],
+      "@transform-service/*": ["packages/transform-service/src/*"],
+      "@shared": ["packages/shared/src/index"],
+      "@shared/*": ["packages/shared/src/*"]
+    },
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["packages"]
+}

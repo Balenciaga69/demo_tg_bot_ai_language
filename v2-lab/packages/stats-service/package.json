@@ -1,0 +1,13 @@
+{
+  "name": "@v2-lab/stats-service",
+  "version": "0.0.1",
+  "description": "Stats Service - Text statistics microservice",
+  "private": true,
+  "scripts": {
+    "build": "nest build stats-service",
+    "start:dev": "nest start stats-service --watch"
+  },
+  "dependencies": {
+    "@v2-lab/shared": "workspace:*"
+  }
+}

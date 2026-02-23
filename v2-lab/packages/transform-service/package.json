@@ -1,0 +1,13 @@
+{
+  "name": "@v2-lab/transform-service",
+  "version": "0.0.1",
+  "description": "Transform Service - Text transformation microservice",
+  "private": true,
+  "scripts": {
+    "build": "nest build transform-service",
+    "start:dev": "nest start transform-service --watch"
+  },
+  "dependencies": {
+    "@v2-lab/shared": "workspace:*"
+  }
+}
