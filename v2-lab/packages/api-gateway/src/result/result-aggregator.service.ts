@@ -30,12 +30,10 @@ interface TaskPayload {
 export class ResultAggregatorService {
   constructor(private readonly redisService: RedisService) {}
 
-  @MessagePattern('stats.completed')
   async onStatsCompleted(@Payload() payload: StatsCompletedPayload): Promise<void> {
     await this.aggregateResult(payload.taskId)
   }
 
-  @MessagePattern('transform.completed')
   async onTransformCompleted(@Payload() payload: TransformCompletedPayload): Promise<void> {
     await this.aggregateResult(payload.taskId)
   }
